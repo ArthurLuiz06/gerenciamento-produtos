@@ -7,5 +7,4 @@ const conexao = mysql.createPool({
     database:'SISTEMA_PRODUTOS'
 });
 
-
 module.exports = conexao
