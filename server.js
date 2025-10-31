@@ -19,12 +19,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 const usuarioRoutes = require('./src/routes/cadastrar-usuario')
 
 // Usar rotas
-app.use('/usuario', usuarioRoutes);
+app.use(usuarioRoutes);
 
-// Pagina cadastro
+// Pagina Login
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'public', 'usuario-cadastro.html'))
+    res.sendFile(path.join(__dirname,'public', 'usuario-login.html'))
 });
+
+// Pagina de Cadastro
+app.get('/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname,'public', 'usuario-cadastro.html'))
+})
 
 //Servidor
 app.listen(3000, () => console.log('Servidor rodando em http://localhost:3000'));

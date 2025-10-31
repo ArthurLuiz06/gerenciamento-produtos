@@ -1,19 +1,22 @@
 const usuario = require('../models/cadastro-usuario')
 
-exports.cadastrar = (req, res) => {
-    const {nome, email, senha} = req.body;
+exports.cadastrar = async (req, res) => {
+  const { nome, email, senha } = req.body;
 
-    if(!nome || !email || !senha) {
-        return res.status(400).send('Prencha todos os campos obrigatórios')
+  if (!nome || !email || !senha) {
+    return res.status(400).json({ erro: 'Preencha todos os campos obrigatórios.' });
+  }
+
+  const novoUsuario = { nome, email, senha };
+
+  try {
+    await usuario.cadastrar(novoUsuario);
+    return res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!' });
+  } catch (erro) {
+    if (erro.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ erro: 'Este e-mail já está cadastrado.' });
     }
-
-    const novoUsuario = {nome, email, senha}
-
-    usuario.cadastrar(novoUsuario, (erro, resultado) => {
-        if(erro) {
-            console.log('Erro ao cadastrar usuário.')
-            return res.status(500).send('Erro ao cadastrar usuário.')
-        }
-        res.status(201).send('Usuário cadastrado com sucesso!')
-    })
-}
+    console.error('Erro ao cadastrar usuário:', erro);
+    return res.status(500).json({ erro: 'Erro interno ao cadastrar usuário.' });
+  }
+};
