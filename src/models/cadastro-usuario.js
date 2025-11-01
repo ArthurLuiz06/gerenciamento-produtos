@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const usuarioCadastroModel = {
     async cadastrar(usuario) {
   try {
+    console.log('Dados recebidos para cadastro:', usuario);
     const senhaCriptografada = await bcrypt.hash(usuario.senha, 10);
     const sql = 'INSERT INTO USUARIOS (nome, email, senha) VALUES (?,?,?)';
     const [result] = await conexao.query(sql, [
