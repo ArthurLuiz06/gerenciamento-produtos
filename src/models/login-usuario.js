@@ -10,7 +10,6 @@ const loginUsuarioModel = {
 
     async validarLogin(email, senha) {
         const usuario = await this.buscarPorEmail(email);
-         console.log('Usuário encontrado:', usuario);
         if(!usuario) return null; //Email não exite
 
         const senhaValida = await bcrypt.compare(senha, usuario.senha);

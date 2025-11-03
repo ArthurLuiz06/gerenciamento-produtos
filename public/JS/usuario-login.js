@@ -15,7 +15,6 @@ form.addEventListener('submit', async (e) => {
         })
 
 
-
         if (resposta.ok) {
             console.log('Login OK');
             window.location.href = '/produtos';

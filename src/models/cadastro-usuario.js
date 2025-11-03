@@ -1,23 +1,10 @@
-const conexao = require('../db/conexao');
-const bcrypt = require('bcrypt');
+const conexao = require('../db/conexao.js');
 
-const usuarioCadastroModel = {
-    async cadastrar(usuario) {
-  try {
-    console.log('Dados recebidos para cadastro:', usuario);
-    const senhaCriptografada = await bcrypt.hash(usuario.senha, 10);
-    const sql = 'INSERT INTO USUARIOS (nome, email, senha) VALUES (?,?,?)';
-    const [result] = await conexao.query(sql, [
-      usuario.nome,
-      usuario.email,
-      senhaCriptografada
-    ]);
-    return result;
-  } catch (erro) {
-    throw erro;
+const usuarioModel = {
+  async cadastrar(usuario) {
+    const sql = 'INSERT INTO USUARIOS (nome, email, senha) VALUES (?, ?, ?)';
+    await conexao.query(sql, [usuario.nome, usuario.email, usuario.senha]);
   }
-}
+};
 
-}
-
-module.exports = usuarioCadastroModel;
+module.exports = usuarioModel;
