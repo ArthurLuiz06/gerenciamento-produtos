@@ -1,7 +1,6 @@
 const loginModel = require('../models/login-usuario')
 
 exports.login = async (req, res) => {
-    console.log(req.body)
     const {email, senha} = req.body;
 
     if(!email || !senha) {
@@ -19,7 +18,11 @@ exports.login = async (req, res) => {
            return res.status(401).json({erro: 'Senha incorreta.'})
         }
 
-        return res.status(200).json({mensagem: 'Login realizado com sucesso!'})
+        return res.status(200).json({
+            mensagem: 'Login realizado com sucesso!',
+            tipo: resultado.TIPO         
+        })
+            
     } catch(erro) {
         console.error('Erro no login:', erro)
         return res.status(500).json({erro: 'Erro interno no servidor'})

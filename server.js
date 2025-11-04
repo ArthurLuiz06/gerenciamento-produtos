@@ -33,9 +33,9 @@ app.get('/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname,'public', 'usuario-cadastro.html'))
 })
 
-//Pagina de Produtos
-app.get('/produtos', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'produtos.html'));
+//Pagina de Produtos-Usuario
+app.get('/produtos/usuario', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'produtos-usuario.html'));
 });
 
 //Servidor

@@ -14,10 +14,20 @@ form.addEventListener('submit', async (e) => {
             body: JSON.stringify({ email, senha })
         })
 
-
         if (resposta.ok) {
             console.log('Login OK');
-            window.location.href = '/produtos';
+
+            const data = await resposta.json();
+            const tipoUsuario = data.tipo;
+        
+            if (tipoUsuario === 'adm') {
+                console.log("Usuário é ADM. Redirecionando para a área de produtos ADM.");
+                window.location.href = '/admin/produtos'; // Rota para o gerenciamento de produtos (ADM)
+            } else {
+                console.log("Usuário comum. Redirecionando para a área de compras.");
+                window.location.href = '/produtos'; // Rota para a área de compras/visualização (Comum)
+            }
+
         } else {
             const data = await resposta.json();
             msg.style.color = 'red';
