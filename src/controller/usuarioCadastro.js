@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const usuarioModel = require('../models/cadastro-usuario');
 
 exports.cadastrar = async (req, res) => {
@@ -9,17 +8,18 @@ exports.cadastrar = async (req, res) => {
   }
 
   try {
-    const senhaCriptografada = await bcrypt.hash(senha, 10);
     
     await usuarioModel.cadastrar({
       nome,
       email,
-      senha: senhaCriptografada
+      senha: senha // A senha é enviada em texto puro
     });
 
     res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!' });
   } catch (erro) {
     console.error('Erro ao cadastrar usuário:', erro);
-    res.status(500).json({ erro: 'Erro ao cadastrar usuário.' });
+    
+    // Podemos verificar por erros de email duplicado aqui, mas manteremos o 500
+    res.status(500).json({ erro: 'E-mail já existe.' });
   }
 };

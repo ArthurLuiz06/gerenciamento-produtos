@@ -21,6 +21,10 @@ form.addEventListener('submit', async (e) => {
       msg.style.color = 'green';
       msg.textContent = data.mensagem;
       form.reset();
+
+      setTimeout(() => {
+        window.location.href = '/' // Direciona para a rota login
+      }, 1500)
     } else {
       msg.style.color = 'red';
       msg.textContent = data.erro || 'Erro ao cadastrar.';
