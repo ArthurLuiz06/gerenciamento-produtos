@@ -37,12 +37,21 @@ exports.atualizarProdutos = async (req, res) => {
 };
 
 
-exports.excluirProdutos = async (req, res) => {
+exports.excluirProduto = async (req, res) => {
+    // Captura o ID do produto da URL (definido na rota como :idproduto)
+    const idproduto = req.params.idproduto; 
+
     try {
-        const excluir = await produtosAdmModel.excluir()
-        res.status(201).json(excluir)
-    } catch(erro) {
-        console.error('Erro ao excluir o produto')
-        res.status(500).json({erro: 'Erro interno ao excluir o produto'})
+        // 💡 CORREÇÃO: Chamar a função 'excluir' do objeto produtoAdmModel
+        const [resultado] = await produtoAdmModel.excluir(idproduto); 
+
+        if (resultado.affectedRows === 0) {
+            return res.status(404).json({ erro: 'Produto não encontrado.' });
+        }
+
+        res.status(200).json({ mensagem: 'Produto excluído com sucesso!' });
+    } catch (erro) {
+        console.error('Erro ao excluir produto:', erro);
+        res.status(500).json({ erro: 'Erro interno do servidor.' });
     }
 }

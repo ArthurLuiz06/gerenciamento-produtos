@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Chama a função de listagem assim que a página carrega
+
     listarProdutosAdm();
 });
 
@@ -9,7 +9,7 @@ async function listarProdutosAdm() {
     tbody.innerHTML = ''; // Limpa a tabela antes de recarregar
 
     try {
-        // Rota que chama o Controller ADM (que usa o Model ADM)
+       
         const resposta = await fetch('/admin/produtos/data'); 
         
         if (!resposta.ok) {
@@ -23,22 +23,22 @@ async function listarProdutosAdm() {
             return;
         }
 
-        // Itera sobre cada produto e cria uma linha na tabela
+        
         produtos.forEach(produto => {
             const row = tbody.insertRow();
             
-            // As propriedades do objeto produto devem corresponder exatamente ao que o DB retorna
+           
             row.insertCell().textContent = produto.IDPRODUTO;
             row.insertCell().textContent = produto.NOME;
             row.insertCell().textContent = produto.DESCRICAO || 'N/A';
             row.insertCell().textContent = `R$ ${parseFloat(produto.VALOR).toFixed(2).replace('.', ',')}`;
             
-            // 💡 Usando QUANTIDADE, conforme seu DB
+           
             row.insertCell().textContent = produto.QUANTIDADE; 
             
             row.insertCell().textContent = produto.IMAGEM_URL ? 'Sim' : 'Não';
 
-            // Célula de Ações (Botões)
+            
             const acoesCell = row.insertCell();
             
             const btnEditar = document.createElement('button');
@@ -61,14 +61,34 @@ async function listarProdutosAdm() {
     }
 }
 
-// 💡 Funções placeholder para o próximo passo
+
 function editarProduto(id) {
     alert(`Funcionalidade Editar para ID ${id} será implementada.`);
 }
 
-function excluirProduto(id) {
-    // Próximo passo será implementar esta função
-    if (confirm(`Tem certeza que deseja excluir o produto ID ${id}?`)) {
-        // Lógica de fetch DELETE virá aqui
+async function excluirProduto(idproduto) {
+    if (!confirm(`Tem certeza que deseja excluir o produto ID ${idproduto}? Esta ação é irreversível.`)) {
+        return; // Usuário cancelou
+    }
+
+    try {
+        // Envia a requisição DELETE para a rota: /admin/produtos/{idproduto}
+        const resposta = await fetch(`/admin/produtos/${idproduto}`, {
+            method: 'DELETE'
+        });
+
+        const data = await resposta.json();
+
+        if (resposta.ok) {
+            alert(data.mensagem);
+            // Recarrega a lista para remover o item deletado
+            listarProdutosAdm(); 
+        } else {
+            alert('Erro ao excluir: ' + (data.erro || 'Erro desconhecido.'));
+        }
+
+    } catch (erro) {
+        console.error('Falha na comunicação com a API de exclusão:', erro);
+        alert('Falha de conexão com o servidor.');
     }
 }

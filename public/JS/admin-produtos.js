@@ -4,7 +4,7 @@ const msg = document.getElementById('mensagemStatus');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // 1. Captura dos dados do formulário
+    
     const nome = document.getElementById('nome').value;
     const descricao = document.getElementById('descricao').value;
     const valor = parseFloat(document.getElementById('valor').value); // Converte para número

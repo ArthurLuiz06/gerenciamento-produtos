@@ -31,9 +31,6 @@ app.use(produtosUsuarios)
 const produtosAdm = require('./src/routes/produtos-adm')
 app.use(produtosAdm)
 
-// Importar pagina de compra-produtos-usuario
-const compraProdutos = require('./src/routes/compra-produtos-usuarios')
-app.use(compraProdutos)
 
 // Pagina Login
 app.get('/', (req, res) => {

@@ -32,16 +32,18 @@ const produtoAdmModel = {
 
     //Excluir produto
     async excluir (id) {
-        const slq = 'DELETE FROM PRODUTOS WHERE IDPRODUTO = ?';
-        return conexao.execute(slq, [id]);
+        const sql = 'DELETE FROM PRODUTOS WHERE IDPRODUTO = ?'; // 💡 CORREÇÃO: Variável SQL
+        return conexao.execute(sql, [id]);
     },
 
-    //Listar produtos
+    // Listar produtos (Mudei 'slq' para 'sql')
     async listarProdutos () {
         const sql = 'SELECT * FROM PRODUTOS';
-        const [rows] = await conexao.query(slq);
+        // 💡 CORREÇÃO: Usar a variável 'sql'
+        const [rows] = await conexao.query(sql); 
         return rows;
     }
 }
+
 
 module.exports = produtoAdmModel;
