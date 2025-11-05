@@ -9,6 +9,7 @@ exports.login = async (req, res) => {
 
     try {
         const resultado = await loginModel.validarLogin(email, senha)
+        console.log('Objeto do Usuário Retornado:', resultado);
 
         if(resultado === null) {
             return res.status(404).json({erro: 'Usuario não encontrado.'})
@@ -18,9 +19,12 @@ exports.login = async (req, res) => {
            return res.status(401).json({erro: 'Senha incorreta.'})
         }
 
+        const tipoUsuario = resultado.TIPO || resultado.tipo || 'usuario';
+
         return res.status(200).json({
             mensagem: 'Login realizado com sucesso!',
-            tipo: resultado.TIPO         
+            tipo: tipoUsuario
+                   
         })
             
     } catch(erro) {

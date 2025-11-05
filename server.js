@@ -23,6 +23,18 @@ app.use(usuarioRoutes);
 const loginRoutes = require('./src/routes/login-usuario')
 app.use(loginRoutes)
 
+// Importar pagina de produtos-usuarios
+const produtosUsuarios = require('./src/routes/produtos-usuarios')
+app.use(produtosUsuarios)
+
+// Importar pagina de produtos-adm
+const produtosAdm = require('./src/routes/produtos-adm')
+app.use(produtosAdm)
+
+// Importar pagina de compra-produtos-usuario
+const compraProdutos = require('./src/routes/compra-produtos-usuarios')
+app.use(compraProdutos)
+
 // Pagina Login
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'public', 'usuario-login.html'))
@@ -34,9 +46,16 @@ app.get('/cadastro', (req, res) => {
 })
 
 //Pagina de Produtos-Usuario
-app.get('/produtos/usuario', (req, res) => {
+app.get('/produtos', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'produtos-usuario.html'));
 });
 
+// Pagina de produtos-adm
+app.get('/admin/produtos', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'produtos-adm.html'))
+})
+
+app.get
+
 //Servidor
-app.listen(3000, () => console.log('Servidor rodando em http://localhost:3000'));
+app.listen(8080, () => console.log('Servidor rodando em http://localhost:8080'));
