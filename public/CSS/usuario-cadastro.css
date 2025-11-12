@@ -1,0 +1,106 @@
+/* 1. Reset Básico e Fundo da Página (Consistente com o Login) */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Fundo cinza claro suave */
+    display: flex; 
+    flex-direction: column; /* Organiza itens verticalmente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. Título Principal */
+body h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* 3. Estilo do Formulário Container (Consistente com o Login) */
+#formCadastro {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    max-width: 400px; 
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* 4. Estilo dos Inputs */
+#formCadastro input[type="text"],
+#formCadastro input[type="email"],
+#formCadastro input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#formCadastro input:focus {
+    border-color: #007bff; /* Azul vibrante ao focar */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* 5. Estilo do Botão "Cadastrar" (Consistente com o Login) */
+#formCadastro button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+#formCadastro button[type="submit"]:hover {
+    background-color: #0056b3; 
+}
+
+/* 6. Estilo da Mensagem (Erro/Sucesso) */
+#mensagem {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #dc3545; 
+    font-weight: bold;
+    min-height: 20px; 
+    text-align: center;
+}
+
+/* 7. Link para Login */
+body > a { /* Seletor para o link LOGIN fora do formulário */
+    display: block;
+    margin-top: 25px;
+    color: #007bff; 
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 16px;
+}
+
+body > a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 8. Responsividade */
+@media (max-width: 600px) {
+    #formCadastro {
+        margin: 20px;
+        padding: 30px 20px;
+        box-shadow: none;
+    }
+}

@@ -1,0 +1,99 @@
+/* 1. Reset e Estilo de Fundo */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Fundo suave */
+    color: #333;
+    padding: 20px;
+}
+
+/* 2. Título Principal */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* 3. Contêiner da Lista de Produtos (Grid Responsivo) */
+#listaProdutos {
+    display: grid;
+    /* Define 4 colunas em telas grandes. Minmax garante responsividade. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Espaço entre os cartões */
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o grid */
+}
+
+/* 4. Estilo de Cada Cartão de Produto (Produto Card) */
+.produto-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Garante que a imagem se ajuste */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.produto-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 5. Estilo da Imagem */
+.produto-imagem {
+    width: 100%;
+    height: 200px; /* Altura fixa para uniformidade */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* 6. Conteúdo e Detalhes do Cartão */
+.produto-card > * {
+    padding: 0 20px; /* Preenchimento lateral para todos os elementos dentro do cartão */
+}
+
+.produto-nome {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 15px 20px 5px 20px;
+    color: #333;
+}
+
+.produto-descricao {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0 20px 10px 20px;
+    flex-grow: 1; /* Faz a descrição ocupar o máximo de espaço possível */
+}
+
+.produto-valor {
+    font-size: 22px;
+    color: #28a745; /* Cor verde para destaque de preço */
+    font-weight: bold;
+    margin: 10px 20px 20px 20px;
+}
+
+/* 7. Estilo do Botão Comprar (Consistente com Login/Cadastro) */
+.botao-comprar {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Azul primário */
+    color: white;
+    border: none;
+    border-radius: 0 0 12px 12px; /* Apenas na parte inferior do cartão */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    font-weight: 600;
+}
+
+.botao-comprar:hover {
+    background-color: #0056b3;
+}
+
+.botao-comprar:active {
+    transform: scale(0.99);
+}

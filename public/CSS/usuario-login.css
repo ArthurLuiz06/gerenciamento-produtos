@@ -1,0 +1,109 @@
+/* 1. Reset Básico e Fundo da Página */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Fundo cinza claro suave */
+    display: flex; /* Centraliza o formulário */
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. Estilo do Formulário Container */
+#formLogin {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 400px; /* Largura máxima para desktops */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* 3. Título e Heading */
+#formLogin h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+/* 4. Estilo dos Inputs */
+#formLogin input[type="email"],
+#formLogin input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#formLogin input:focus {
+    border-color: #007bff; /* Azul vibrante ao focar */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* 5. Estilo do Botão "Entrar" */
+#formLogin button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff; /* Azul primário */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+#formLogin button[type="submit"]:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+
+#formLogin button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+/* 6. Estilo da Mensagem (Erro/Sucesso) */
+#mensagem {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #dc3545; /* Vermelho para erros (ajuste no JS para sucesso) */
+    font-weight: bold;
+    min-height: 20px; /* Mantém o espaço para evitar pulos de layout */
+}
+
+/* 7. Link de Cadastro */
+#formLogin p {
+    margin-top: 25px;
+    color: #6c757d;
+}
+
+#formLogin a {
+    color: #007bff; /* Azul primário */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+#formLogin a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 8. Responsividade para telas menores (smartphones) */
+@media (max-width: 600px) {
+    #formLogin {
+        margin: 20px;
+        padding: 30px 20px;
+        box-shadow: none; /* Remove a sombra em telas muito pequenas */
+    }
+}

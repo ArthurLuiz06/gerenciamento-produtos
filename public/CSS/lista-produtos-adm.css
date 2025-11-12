@@ -1,0 +1,127 @@
+/*
+Arquivo: public/CSS/lista-produtos-adm.css
+Estilo para a Tabela de Listagem/Gerenciamento de Produtos (ADM)
+*/
+
+/* 1. Reset e Layout Base */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Fundo suave */
+    color: #333;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/* 2. Estilo da Tabela Principal */
+#tabelaProdutosAdm {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaçamento entre células */
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px; /* Cantos suaves */
+    overflow: hidden; /* Garante que as bordas da tabela sigam o border-radius */
+}
+
+/* 3. Cabeçalho da Tabela (<thead>) */
+#tabelaProdutosAdm thead th {
+    background-color: #007bff; /* Azul primário, consistente com a marca */
+    color: white;
+    font-weight: 600;
+    padding: 12px 15px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* 4. Corpo da Tabela (<tbody>) */
+#tabelaProdutosAdm tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: middle; /* Alinha conteúdo ao centro vertical */
+}
+
+/* Efeito Zebra (listras) para melhor legibilidade */
+#tabelaProdutosAdm tbody tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+#tabelaProdutosAdm tbody tr:hover {
+    background-color: #e9ecef; /* Suave destaque ao passar o mouse */
+}
+
+/* Destaque para o ID (Pode ser uma coluna estreita) */
+#tabelaProdutosAdm tbody td:first-child {
+    font-weight: bold;
+    color: #007bff;
+    width: 50px; /* Largura pequena para ID */
+}
+
+/* 5. Coluna de Ações (Botões Editar/Excluir) */
+#tabelaProdutosAdm td button {
+    padding: 6px 12px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+#tabelaProdutosAdm td button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Botão Editar (Amarelo/Alerta) */
+#tabelaProdutosAdm td button:nth-of-type(1) { 
+    background-color: #ffc107;
+    color: #333;
+}
+
+/* Botão Excluir (Vermelho/Perigo) */
+#tabelaProdutosAdm td button:nth-of-type(2) { 
+    background-color: #dc3545;
+    color: white;
+}
+
+/* 6. Mensagem de Status (Abaixo da Tabela) */
+#mensagemStatusListagem {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+    padding: 10px;
+    min-height: 30px;
+}
+
+/* 7. Responsividade da Tabela */
+/* Tabela é difícil de ser responsiva. Em telas pequenas, podemos forçar o scroll horizontal */
+@media (max-width: 900px) {
+    body {
+        padding: 0;
+    }
+    .table-wrapper { /* Envolva sua tabela em uma div se quiser scroll */
+        overflow-x: auto;
+    }
+    #tabelaProdutosAdm {
+        min-width: 800px; /* Garante que a tabela não se quebre */
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    h2, h3 {
+        padding: 0 10px;
+    }
+}
