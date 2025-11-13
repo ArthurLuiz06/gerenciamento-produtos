@@ -1,74 +1,16 @@
-document.addEventListener('DOMContentLoaded', () => {
+const tabelaCorpo = document.querySelector('#tabelaProdutosAdm tbody'); 
+const mensagemStatusListagem = document.getElementById('mensagemStatusListagem'); 
 
-    listarProdutosAdm();
-});
-
-async function listarProdutosAdm() {
-    const tbody = document.querySelector('#tabelaProdutosAdm tbody');
-    const msgStatus = document.getElementById('mensagemStatusListagem');
-    tbody.innerHTML = ''; // Limpa a tabela antes de recarregar
-
-    try {
-       
-        const resposta = await fetch('/admin/produtos/data'); 
-        
-        if (!resposta.ok) {
-            throw new Error('Falha ao carregar os dados. Status: ' + resposta.status);
-        }
-
-        const produtos = await resposta.json();
-        
-        if (produtos.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7">Nenhum produto cadastrado.</td></tr>';
-            return;
-        }
-
-        
-        produtos.forEach(produto => {
-            const row = tbody.insertRow();
-            
-           
-            row.insertCell().textContent = produto.IDPRODUTO;
-            row.insertCell().textContent = produto.NOME;
-            row.insertCell().textContent = produto.DESCRICAO || 'N/A';
-            row.insertCell().textContent = `R$ ${parseFloat(produto.VALOR).toFixed(2).replace('.', ',')}`;
-            
-           
-            row.insertCell().textContent = produto.QUANTIDADE; 
-            
-            row.insertCell().textContent = produto.IMAGEM_URL ? 'Sim' : 'Não';
-
-            
-            const acoesCell = row.insertCell();
-            
-            const btnEditar = document.createElement('button');
-            btnEditar.textContent = 'Editar';
-            btnEditar.onclick = () => editarProduto(produto.IDPRODUTO); // Implementaremos depois
-            acoesCell.appendChild(btnEditar);
-            
-            const btnExcluir = document.createElement('button');
-            btnExcluir.textContent = 'Excluir';
-            btnExcluir.onclick = () => excluirProduto(produto.IDPRODUTO); // Implementaremos depois
-            acoesCell.appendChild(btnExcluir);
-        });
-        
-        msgStatus.textContent = `Total de produtos: ${produtos.length}`;
-
-    } catch (erro) {
-        console.error('Erro na listagem ADM:', erro);
-        msgStatus.textContent = 'Erro ao buscar dados do servidor.';
-        msgStatus.style.color = 'red';
-    }
+function redirecionarParaEdicao(idproduto) {
+    //Redireciona para o novo HTML de edição, passando o ID na URL
+    window.location.href = `/produto-edicao.html?idproduto=${idproduto}`;
 }
 
 
-function editarProduto(id) {
-    alert(`Funcionalidade Editar para ID ${id} será implementada.`);
-}
-
+// FUNÇÃO DE EXCLUSÃO (DELETE) ---
 async function excluirProduto(idproduto) {
     if (!confirm(`Tem certeza que deseja excluir o produto ID ${idproduto}? Esta ação é irreversível.`)) {
-        return; // Usuário cancelou
+        return; 
     }
 
     try {
@@ -92,3 +34,56 @@ async function excluirProduto(idproduto) {
         alert('Falha de conexão com o servidor.');
     }
 }
+
+
+// FUNÇÃO PARA LISTAR E RENDERIZAR A TABELA (READ) ---
+async function listarProdutosAdm() {
+    mensagemStatusListagem.textContent = 'Carregando produtos...';
+    tabelaCorpo.innerHTML = ''; // Limpa a tabela antes de carregar
+
+    try {
+        // Rota GET que criei: /admin/produtos/data
+        const resposta = await fetch('/admin/produtos/data');
+        const produtos = await resposta.json();
+        
+        if (!resposta.ok || produtos.length === 0) {
+            mensagemStatusListagem.textContent = 'Nenhum produto cadastrado.';
+            return;
+        }
+
+        produtos.forEach(produto => {
+            const row = tabelaCorpo.insertRow();
+            row.insertCell().textContent = produto.IDPRODUTO;
+            row.insertCell().textContent = produto.NOME;
+            row.insertCell().textContent = produto.DESCRICAO || '-'; // Tratamento para nulo
+            row.insertCell().textContent = `R$ ${produto.VALOR.toFixed(2).replace('.', ',')}`;
+            row.insertCell().textContent = produto.QUANTIDADE;
+            row.insertCell().textContent = produto.IMAGEM_URL ? produto.IMAGEM_URL.substring(0, 30) + '...' : '-';
+
+            // Coluna de Ações
+            const cellAcoes = row.insertCell();
+            
+            // BOTÃO DE EDIÇÃO: Agora chama a função de redirecionamento
+            const btnEditar = document.createElement('button');
+            btnEditar.textContent = 'Editar';
+            btnEditar.onclick = () => redirecionarParaEdicao(produto.IDPRODUTO);
+            cellAcoes.appendChild(btnEditar);
+            
+            // BOTÃO DE EXCLUSÃO
+            const btnExcluir = document.createElement('button');
+            btnExcluir.textContent = 'Excluir';
+            btnExcluir.onclick = () => excluirProduto(produto.IDPRODUTO);
+            cellAcoes.appendChild(btnExcluir);
+        });
+
+        mensagemStatusListagem.textContent = `Total de ${produtos.length} produtos listados.`;
+
+    } catch (erro) {
+        console.error('Erro ao listar produtos:', erro);
+        mensagemStatusListagem.textContent = 'Erro ao carregar a lista de produtos.';
+    }
+}
+
+// INICIALIZAÇÃO
+// Inicia a listagem assim que a página é carregada
+document.addEventListener('DOMContentLoaded', listarProdutosAdm);

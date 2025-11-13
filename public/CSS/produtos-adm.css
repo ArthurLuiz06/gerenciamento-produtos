@@ -95,6 +95,39 @@ h2, h3 {
     margin-top: 15px;
 }
 
+#formCadastroProduto p {
+     margin-top: 10px;
+    color: #6c757d;
+    text-align: center;
+}
+
+#formCadastroProduto a {
+    color: #007bff; /* Azul primário */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 17px;
+}
+
+#formCadastroProduto a:hover {
+     color: #0056b3;
+    text-decoration: underline;
+}
+
+#btnSairConta {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+
+    /* Posicionamento no canto superior direito */
+    float: right; 
+    margin-top: 20px; 
+    margin-left: 900px;     
+}
+
 
 /* 6. Responsividade */
 @media (max-width: 600px) {

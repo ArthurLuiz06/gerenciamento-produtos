@@ -42,6 +42,15 @@ const produtoAdmModel = {
         // 💡 CORREÇÃO: Usar a variável 'sql'
         const [rows] = await conexao.query(sql); 
         return rows;
+    },
+
+    async buscarPorID (id) {
+        const sql = 'SELECT * FROM PRODUTOS WHERE IDPRODUTOS = ?';
+        // Usei conexao.query para obter 'rows' (resultados) e 'fields'
+        const [rows] = await conexao.query(sql, [id])
+
+        // Retorna o primeiro (e unico) resultado ou null
+        return rows[0] || null;
     }
 }
 
