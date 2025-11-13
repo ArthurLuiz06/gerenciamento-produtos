@@ -8,7 +8,7 @@ const produtoAdmModel = {
             produto.nome,
             produto.descricao,
             produto.valor,
-            produto.estoque,
+            produto.quantidade,
             produto.imagem_url
         ];
 
@@ -22,7 +22,7 @@ const produtoAdmModel = {
             produto.nome,
             produto.descricao,
             produto.valor,
-            produto.estoque,
+            produto.quantidade,
             produto.imagem_url,
             id
         ];

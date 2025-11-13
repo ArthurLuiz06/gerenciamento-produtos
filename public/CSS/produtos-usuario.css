@@ -5,7 +5,14 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f7f6; /* Fundo suave */
     color: #333;
-    padding: 20px;
+    padding: 20px 0; /* Ajusta o padding verticalmente */
+}
+
+/* NOVO: Contêiner Principal da Página (Centraliza e Limita) */
+#main-container {
+    max-width: 1200px; /* Limita a largura máxima do seu conteúdo */
+    margin: 0 auto; /* Centraliza o contêiner na tela */
+    padding: 0 20px; /* Adiciona um padding interno para respirar */
 }
 
 /* 2. Título Principal */
@@ -19,11 +26,13 @@ h2 {
 /* 3. Contêiner da Lista de Produtos (Grid Responsivo) */
 #listaProdutos {
     display: grid;
-    /* Define 4 colunas em telas grandes. Minmax garante responsividade. */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px; /* Espaço entre os cartões */
-    max-width: 1200px;
-    margin: 0 auto; /* Centraliza o grid */
+    /* 🔑 CORREÇÃO: Define a largura das colunas e centraliza-as */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    
+    /* 🔑 CORREÇÃO: Centraliza os itens quando há poucos produtos */
+    justify-content: center; 
+    
+    gap: 30px; 
 }
 
 /* 4. Estilo de Cada Cartão de Produto (Produto Card) */
@@ -31,10 +40,11 @@ h2 {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Garante que a imagem se ajuste */
+    overflow: hidden; /* CRÍTICO: Garante que a imagem se ajuste e não estoure */
     display: flex;
     flex-direction: column;
     transition: transform 0.3s, box-shadow 0.3s;
+    max-width: 100%;
 }
 
 .produto-card:hover {
@@ -42,12 +52,23 @@ h2 {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 5. Estilo da Imagem */
-.produto-imagem {
+/* 5. Estilo da Imagem (SOLUÇÃO FINAL ISOLADA COM WRAPPER) */
+
+/* Container para isolar a imagem e definir a proporção */
+.img-wrapper {
     width: 100%;
-    height: 200px; /* Altura fixa para uniformidade */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
-    border-bottom: 1px solid #e0e0e0;
+    /* 🔑 CRÍTICO: Define a altura do container de imagem usando a proporção 4:3 */
+    aspect-ratio: 4 / 3; 
+    overflow: hidden; 
+    border-radius: 12px 12px 0 0;
+}
+
+/* Estilo da Imagem dentro do wrapper */
+.img-wrapper img {
+    display: block; 
+    width: 100%; /* Ocupa 100% da largura do wrapper */
+    height: 100%; /* Ocupa 100% da altura do wrapper */
+    object-fit: cover; /* Garante que ela preencha o container sem distorcer */
 }
 
 /* 6. Conteúdo e Detalhes do Cartão */
@@ -66,24 +87,24 @@ h2 {
     font-size: 14px;
     color: #6c757d;
     margin: 0 20px 10px 20px;
-    flex-grow: 1; /* Faz a descrição ocupar o máximo de espaço possível */
+    flex-grow: 1; 
 }
 
 .produto-valor {
     font-size: 22px;
-    color: #28a745; /* Cor verde para destaque de preço */
+    color: #28a745; 
     font-weight: bold;
     margin: 10px 20px 20px 20px;
 }
 
-/* 7. Estilo do Botão Comprar (Consistente com Login/Cadastro) */
+/* 7. Estilo do Botão Comprar */
 .botao-comprar {
     width: 100%;
     padding: 12px;
-    background-color: #007bff; /* Azul primário */
+    background-color: #007bff; 
     color: white;
     border: none;
-    border-radius: 0 0 12px 12px; /* Apenas na parte inferior do cartão */
+    border-radius: 0 0 12px 12px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;

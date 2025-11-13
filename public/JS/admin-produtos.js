@@ -8,14 +8,14 @@ form.addEventListener('submit', async (e) => {
     const nome = document.getElementById('nome').value;
     const descricao = document.getElementById('descricao').value;
     const valor = parseFloat(document.getElementById('valor').value); // Converte para número
-    const estoque = parseInt(document.getElementById('estoque').value, 10); // Converte para inteiro
+    const quantidade = parseInt(document.getElementById('quantidade').value, 10); // Converte para inteiro
     const imagem_url = document.getElementById('imagem_url').value;
 
     try {
         const resposta = await fetch('/admin/produtos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, descricao, valor, estoque, imagem_url })
+            body: JSON.stringify({ nome, descricao, valor, quantidade, imagem_url })
         });
 
         const data = await resposta.json();
