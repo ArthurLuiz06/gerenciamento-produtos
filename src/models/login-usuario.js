@@ -3,7 +3,7 @@ const conexao = require('../db/conexao')
 
 const loginUsuarioModel = {
     async buscarPorEmail(email) {
-        const sql = 'SELECT * FROM USUARIOS WHERE email = ?';
+        const sql = 'SELECT * FROM USUARIO WHERE email = ?';
         const [rows] = await conexao.query(sql, [email]);
         return rows[0]; // Retorna o objeto do usuário ou undefined
     },

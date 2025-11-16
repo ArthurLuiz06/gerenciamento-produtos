@@ -4,7 +4,7 @@ const conexao = mysql.createPool({
     host:'localhost',
     user:'root',
     password:'1234',
-    database:'SISTEMA_PRODUTOS',
+    database:'sistema_produto',
     charset: 'utf8mb4' 
 });
 

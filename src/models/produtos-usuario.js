@@ -10,7 +10,7 @@ const produtoUsuarioModel = {
 
     // Comprar
     async diminuirEstoque(idproduto, quantidade) {
-        const sql = 'UPDATE PRODUTOS SET QUANTIDADE = QUANTIDADE - ? WHERE IDPRODUTO = ? AND QUANTIDADE >= ?'
+        const sql = 'UPDATE PRODUTO SET QUANTIDADE = QUANTIDADE - ? WHERE IDPRODUTO = ? AND QUANTIDADE >= ?'
         return conexao.execute(sql, [quantidade, idproduto, quantidade]);
     }
 }

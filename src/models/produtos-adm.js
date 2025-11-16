@@ -3,7 +3,7 @@ const conexao = require('../db/conexao')
 const produtoAdmModel = {
     // Cadastrar produtos
     async cadastrar(produto) {
-        const sql = 'INSERT INTO PRODUTOS (NOME, DESCRICAO, VALOR, QUANTIDADE, IMAGEM_URL) VALUES (?,?,?,?,?)';
+        const sql = 'INSERT INTO PRODUTO (NOME, DESCRICAO, VALOR, QUANTIDADE, IMAGEM_URL) VALUES (?,?,?,?,?)';
         const params = [
             produto.nome,
             produto.descricao,
@@ -17,7 +17,7 @@ const produtoAdmModel = {
 
     //Atualiza/ edita produto
     async atualizar(id, produto) {
-        const sql = 'UPDATE PRODUTOS SET NOME=?, DESCRICAO=?, VALOR=?, QUANTIDADE=?, IMAGEM_URL=? WHERE IDPRODUTO=?'
+        const sql = 'UPDATE PRODUTO SET NOME=?, DESCRICAO=?, VALOR=?, QUANTIDADE=?, IMAGEM_URL=? WHERE IDPRODUTO=?'
         const params = [
             produto.nome,
             produto.descricao,
