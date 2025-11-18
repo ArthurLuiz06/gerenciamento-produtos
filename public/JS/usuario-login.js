@@ -20,7 +20,7 @@ form.addEventListener('submit', async (e) => {
             const data = await resposta.json();
             const tipoUsuario = data.tipo;
         
-            if (tipoUsuario === 'adm') {
+            if (tipoUsuario === 'admin') {
                 console.log("Usuário é ADM. Redirecionando para a área de produtos ADM.");
                 window.location.href = '/admin/produtos'; // Rota para o gerenciamento de produtos (ADM)
             } else {

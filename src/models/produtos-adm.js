@@ -32,20 +32,20 @@ const produtoAdmModel = {
 
     //Excluir produto
     async excluir (id) {
-        const sql = 'DELETE FROM PRODUTOS WHERE IDPRODUTO = ?'; // 💡 CORREÇÃO: Variável SQL
+        const sql = 'DELETE FROM PRODUTO WHERE IDPRODUTO = ?'; // 💡 CORREÇÃO: Variável SQL
         return conexao.execute(sql, [id]);
     },
 
     // Listar produtos (Mudei 'slq' para 'sql')
     async listarProdutos () {
-        const sql = 'SELECT * FROM PRODUTOS';
+        const sql = 'SELECT * FROM PRODUTO';
         // 💡 CORREÇÃO: Usar a variável 'sql'
         const [rows] = await conexao.query(sql); 
         return rows;
     },
 
     async buscarPorID (id) {
-        const sql = 'SELECT * FROM PRODUTOS WHERE IDPRODUTOS = ?';
+        const sql = 'SELECT * FROM PRODUTO WHERE IDPRODUTOS = ?';
         // Usei conexao.query para obter 'rows' (resultados) e 'fields'
         const [rows] = await conexao.query(sql, [id])
 

@@ -17,7 +17,7 @@ async function sairDaConta() {
 
         if (resposta.ok) {
             alert('Sessão encerrada com sucesso.');
-            window.location.href = '/login.html'; 
+            window.location.href = '/'; 
         } else {
             const data = await resposta.json();
             alert('Erro ao sair da conta: ' + (data.erro || 'Tente novamente.'));

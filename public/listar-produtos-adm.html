@@ -5,36 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADM - Gerenciar Produtos</title>
-    <button id="btnSairConta">Sair da Conta</button>
     <link rel="stylesheet" href="./CSS/lista-produtos-adm.css">
-</head>
+    </head>
 
 <body>
+    <header style="width: 100%; overflow: hidden;">
+        <button id="btnSairConta">Sair da Conta</button>
+    </header>
 
-        <h2>Gerenciamento de Produtos</h2>
+    <h2>Gerenciamento de Produtos</h2>
 
-    <a href="produto-cadastro-edicao.html" style="margin-bottom: 20px; display: block;">+ Cadastrar Novo Produto</a>
+    <a href="produto-edicao.html" style="margin-bottom: 20px; display: block;">+ Cadastrar Novo Produto</a>
 
-        <h3>Lista de Produtos Cadastrados</h3>
-       
-        <table id="tabelaProdutosAdm" border="1" width="100%">
-                <thead>
-                        <tr>
-                              <th>ID</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                                <th>Estoque (QUANTIDADE)</th>
-                                <th>Imagem URL</th>
-                                <th>Ações</th>             </tr>
-                    </thead>
-                <tbody>
-                                </tbody>
-            </table>
-       
-        <p id="mensagemStatusListagem"></p>
+    <h3>Lista de Produtos Cadastrados</h3>
 
-           
+    <table id="tabelaProdutosAdm" border="1" width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Estoque (QUANTIDADE)</th>
+                <th>Imagem URL</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <p id="mensagemStatusListagem"></p>
+
     <script src="./JS/listar-produtos-adm.js"></script>
     <script src="./JS/logout-geral.js"></script>
 </body>

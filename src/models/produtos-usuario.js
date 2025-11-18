@@ -3,7 +3,7 @@ const conexao = require('../db/conexao');
 const produtoUsuarioModel = {
     //listar produtos disponiveis
     async listarDisponiveis() {
-        const sql = 'SELECT IDPRODUTO, NOME, DESCRICAO, VALOR, IMAGEM_URL FROM PRODUTOS';
+        const sql = 'SELECT IDPRODUTO, NOME, DESCRICAO, VALOR, IMAGEM_URL FROM PRODUTO';
         const [rows] = await conexao.query(sql);
         return rows;
     },

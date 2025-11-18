@@ -118,3 +118,16 @@ h2 {
 .botao-comprar:active {
     transform: scale(0.99);
 }
+
+#btnSairConta {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+
+    /* Posicionamento no canto superior direito */
+    float: right; 
+    margin-top: 20px; 
+}

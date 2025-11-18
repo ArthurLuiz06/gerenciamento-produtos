@@ -133,3 +133,24 @@ h2, h3 {
         padding: 0 10px;
     }
 }
+
+#tabelaProdutosAdm tbody td img {
+    max-width: 100px; /* Limita o tamanho horizontal da imagem */
+    max-height: 80px; /* Limita o tamanho vertical */
+    display: block; /* Garante que a imagem se comporte como um bloco */
+    object-fit: contain; /* Garante que a imagem se ajuste sem cortar ou esticar */
+    border-radius: 4px;
+}
+
+#btnSairConta {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+
+    /* Posicionamento no canto superior direito */
+    float: right; 
+    margin-top: 20px; 
+}

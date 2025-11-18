@@ -58,8 +58,18 @@ async function listarProdutosAdm() {
             row.insertCell().textContent = produto.DESCRICAO || '-'; // Tratamento para nulo
             row.insertCell().textContent = `R$ ${produto.VALOR.toFixed(2).replace('.', ',')}`;
             row.insertCell().textContent = produto.QUANTIDADE;
-            row.insertCell().textContent = produto.IMAGEM_URL ? produto.IMAGEM_URL.substring(0, 30) + '...' : '-';
-
+            const cellImagem = row.insertCell();
+            if (produto.IMAGEM_URL) {
+                const imgElement = document.createElement('img');
+                
+                // Define a fonte da imagem
+                imgElement.src = produto.IMAGEM_URL; 
+                
+                
+                cellImagem.appendChild(imgElement);
+            } else {
+                cellImagem.textContent = '-';
+            }
             // Coluna de Ações
             const cellAcoes = row.insertCell();
             
