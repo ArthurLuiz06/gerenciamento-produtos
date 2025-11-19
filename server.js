@@ -55,6 +55,5 @@ app.get('/admin/produtos', verificarPermissaoAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'produtos-adm.html'))
 })
 
-
 //Servidor
 app.listen(8080, () => console.log('Servidor rodando em http://localhost:8080'));
