@@ -44,7 +44,7 @@ async function listarProdutosAdm() {
     try {
         // Rota GET que criei: /admin/produtos/data
         const resposta = await fetch('/admin/produtos/data');
-        const produtos = await resposta.json();
+        const produtos = await resposta.send();
         
         if (!resposta.ok || produtos.length === 0) {
             mensagemStatusListagem.textContent = 'Nenhum produto cadastrado.';
