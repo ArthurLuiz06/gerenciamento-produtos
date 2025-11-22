@@ -1,8 +1,4 @@
 function verificarPermissaoAdmin(req, res, next) {
-    if (!req.session || !req.session.usuario) { 
-        return res.redirect('/erro401.html')
-    }
-   
     if(!req.session || req.session.tipo != 'admin') { 
         console.log('Acesso negado: Tentativa de acesso à área ADM sem permissão.')
 

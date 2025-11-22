@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const session = require('express-session')
 const app = express();
-
 
 const conexao = require('./src/db/conexao')
 const {validarRedirecionamento} = require('./src/utils/segurança')
@@ -12,48 +12,48 @@ const {verificarPermissaoAdmin} = require('./src/utils/segurança_admin')
 app.use(cors());
 app.use(express.urlencoded({extended:true}))
 app.use(express.json());
-app.use(validarRedirecionamento)
 
+// Precisa vir ANTES das rotas
+app.use(session({
+  secret: "meuServidor_BackEnd_2025_!@#xA92",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 }
+}));
 
-//Servir os arquivos da pasta public
+app.use(validarRedirecionamento);
+
+// rota de logout
+const logoutRoute = require('./src/routes/logout');
+app.use(logoutRoute);
+
+// Servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Importar rotas Cadastro
-const usuarioRoutes = require('./src/routes/cadastrar-usuario')
-app.use(usuarioRoutes);
+// Rotas
+app.use(require('./src/routes/cadastrar-usuario'));
+app.use(require('./src/routes/login-usuario'));
+app.use(require('./src/routes/produtos-usuarios'));
+app.use(require('./src/routes/produtos-adm'));
 
-// Importar rotas Login
-const loginRoutes = require('./src/routes/login-usuario')
-app.use(loginRoutes)
-
-// Importar pagina de produtos-usuarios
-const produtosUsuarios = require('./src/routes/produtos-usuarios')
-app.use(produtosUsuarios)
-
-// Importar pagina de produtos-adm
-const produtosAdm = require('./src/routes/produtos-adm')
-app.use(produtosAdm)
-
-
-// Pagina Login
+// Rotas de páginas
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'public', 'usuario-login.html'))
+    res.sendFile(path.join(__dirname,'views', 'usuario-login.html'))
 });
 
-// Pagina de Cadastro
 app.get('/cadastro', (req, res) => {
-    res.sendFile(path.join(__dirname,'public', 'usuario-cadastro.html'))
-})
-
-//Pagina de Produtos-Usuario
-app.get('/produtos', verificarPermissaoAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'produtos-usuario.html'));
+    res.sendFile(path.join(__dirname,'views', 'usuario-cadastro.html'))
 });
 
-// Pagina de produtos-adm
-app.get('/admin/produtos', verificarPermissaoAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'produtos-adm.html'))
-})
+app.get('/produtos', (req, res) => {
+    if(!req.session || !req.session.usuario) {
+        return res.redirect('/erro401.html')
+    }
+    res.sendFile(path.join(__dirname,'views','produtos-usuario.html'))
+});
 
-//Servidor
+app.get('/admin/produtos', verificarPermissaoAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname,'views','produtos-adm.html'))
+});
+
 app.listen(8080, () => console.log('Servidor rodando em http://localhost:8080'));

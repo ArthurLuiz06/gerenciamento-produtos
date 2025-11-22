@@ -1,19 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const produtosAdmController = require('../controller/produtos-adm.js')
+const {verificarPermissaoAdmin} = require('../utils/segurança_admin.js')
 
-router.post('/admin/produtos', produtosAdmController.cadastrarProduto)
+router.post('/admin/produtos',verificarPermissaoAdmin, produtosAdmController.cadastrarProduto)
 
-router.get('/admin/produtos/data', produtosAdmController.listarProdutosAdm)
+router.get('/admin/produtos/:idproduto',verificarPermissaoAdmin, produtosAdmController.buscarProdutoPorId)
 
-router.get('/admin/produtos/:idproduto', produtosAdmController.buscarProdutoPorId)
+router.put('/admin/produtos/:idproduto',verificarPermissaoAdmin, produtosAdmController.atualizarProdutos)
 
-router.put('/admin/produtos/:idproduto', produtosAdmController.atualizarProdutos)
-
-router.delete('/admin/produtos/:idproduto', produtosAdmController.excluirProduto)
-
-router.post('/logout', (req, res) => {
-    res.status(200).json({ mensagem: 'Logout realizado com sucesso.' });
-});
+router.delete('/admin/produtos/:idproduto',verificarPermissaoAdmin, produtosAdmController.excluirProduto)
 
 module.exports = router;
