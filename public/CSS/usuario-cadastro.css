@@ -81,7 +81,7 @@ body h1 {
 }
 
 /* 7. Link para Login */
-body > a { /* Seletor para o link LOGIN fora do formulário */
+ a { /* Seletor para o link LOGIN fora do formulário */
     display: block;
     margin-top: 25px;
     color: #007bff; 
@@ -91,7 +91,7 @@ body > a { /* Seletor para o link LOGIN fora do formulário */
     font-size: 16px;
 }
 
-body > a:hover {
+ a:hover {
     color: #0056b3;
     text-decoration: underline;
 }
